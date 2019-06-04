@@ -1,4 +1,4 @@
-import java.lang.*
+import java.util.*
 
 fun main(args: Array<String>){
     println("Hello World")
@@ -88,4 +88,18 @@ fun ranges(){
     }
 
     var letter = 'a'..'z'
+}
+
+fun exceptions(){
+    var reader = FileReader("filename")
+
+    // Not necessary but similar to Java
+    try {
+        reader.ReadFile();
+    }
+    catch(Exception e) {
+        
+    }finally{
+
+    }
 }
