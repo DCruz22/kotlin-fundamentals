@@ -2,6 +2,21 @@
 fun main(args: Array<String>) {
     val dariel = Student("Dariel", "Cruz", 2)
     print(dariel.Id)
+
+    Student.createPostgraduate("Juan")
+    Student.createUndergrad("Pedro")
+}
+
+class Program {
+    companion object{
+        //Make the Jvm see a method as static
+        @JvmStatic
+        fun main(args: Array<String>) {
+            val dariel = Student("Dariel", "Cruz", 2)
+            print(dariel.Id)
+
+        }
+    }
 }
 
 abstract class Person(var firstName: String, var lastName: String){    
@@ -35,8 +50,35 @@ class Student(var firstName: String, var lastName: String, _Id: Int) : Person(fi
         return ""
     }
 
-    override fun getAdderss():String{
+    override fun getAddress():String{
         return ""
     }
 
+    //Provide Factory functionality. Methods are static
+    companion object : XmlSerializer<Student> {
+
+        override fun toXml(item: Student){
+
+        }
+        
+        fun createUndergrad(name: String) : Undergraduate{
+            return Undergraduate(name)
+        }
+
+        fun createPostgraduate(name: String) : Postgraduate{
+            return Postgraduate(name)
+        }
+    }
+}
+
+class Undergraduate(firstName: String) : Student(firstName, "", 1){
+
+}
+
+class Postgraduate(firstName: String) : Student(firstName, "", 1){
+    
+}
+
+interface XmlSerializer<T>{
+    fun toXml(item: T)
 }
